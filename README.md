@@ -1,1 +1,1 @@
-# QuickStick---Capstone
+# Locked In Gaming---Capstone
