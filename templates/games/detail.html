@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="gameprofile_background">
+    <div class="gameprofile_gradient">
+        <!-- <img src="{{ game.thumbnail }}" alt=""> -->
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="siderbar control-box">
+            <div class="card shadow mb-4 rounded">
+                <img src="{{ game.thumbnail }}" width="" height="" alt="{{ game['title'] }}" class="img2">
+            </div>
+            <div class="rate-section btn-group btn-block text-center shadow-sm rounded">
+                {% if g.user %}
+                <a href="/gamestatus/new" class="likeButton btn-dark2" style="border-bottom-left-radius: 5px; border-top-left-radius: 5px;">
+                    <div class="text-success">
+                        <i class="fa fa-bolt fa-lg text-success"></i>
+                        <!-- insert Game Status button here -->
+                        <!-- <div class="count mb-n2 text-muted">0</div> -->
+                        <span class="title small">Add Game Status</span>
+                    </div>
+                </a>
+                {% else %}
+                <a href="/login">Please Login to Submit a Game Status!</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <span class="small">
+            <a href="/" class="nocolor">Home</a>
+               > 
+            <a href="/games" class="nocolor">Games</a>
+               > 
+            <span class="text-muted">{{ game['title'] }}</span>
+        </span>
+        <h1>{{ game['title'] }}</h1>
+        <h3 class="mt-5">{{ game['title'] }} Screenshots</h3>
+        <hr class="mt-2 mb-3">
+        <div class="row text-center text-lg-left">
+        {% for screenshot in game['screenshots'] %}
+            <div class="col-lg-4 col-md-4 col-6">
+                <a href="{{ screenshot['image'] }}" class="d-block mb-3 h-100">
+                    <img src="{{ screenshot['image'] }}" class="img-thumbnail img-fluid shadow-sm rounded">
+                </a>
+            </div>
+        {% endfor %}
+        </div>
+        <h3 class="mt-5">Minimum System Requirements</h3>
+        <hr class="mt-2 mb-3">
+        <div class="row mb-5">
+            <div class="col-5 col-md-4">
+                <span class="text-muted">
+                    OS: {{ game['minimum_system_requirements']['os'] }}
+                </span>
+            </div>
+            <div class="col-5 col-md-4">
+                <span class="text-muted">
+                    Processor: {{ game['minimum_system_requirements']['processor'] }}
+                </span>
+            </div>
+            <div class="col-5 col-md-4">
+                <span class="text-muted">
+                    Memory: {{ game['minimum_system_requirements']['memory'] }}
+                </span>
+            </div>
+            <div class="col-5 col-md-4">
+                <span class="text-muted">
+                    Graphics: {{ game['minimum_system_requirements']['graphics'] }}
+                </span>
+            </div>
+            <div class="col-5 col-md-4">
+                <span class="text-muted">
+                    Storage: {{ game['minimum_system_requirements']['storage'] }}
+                </span>
+            </div>
+        </div>
+        <h3 class="mt-5">Game Information</h3>
+        <hr class="mt-2 mb-3">
+        <div class="row mb-3">
+            <div class="col-6 col-md-4">
+                <span class="text-muted">
+                    Title 
+                    <br>
+                </span>
+                <p>{{ game['title'] }}</p>
+            </div>
+            <div class="col-6 col-md-4">
+                <span class="text-muted">
+                    Developer
+                    <br>
+                </span>
+                <p>{{ game['developer'] }}</p>
+            </div>
+            <div class="col-6 col-md-4">
+                <span class="text-muted">
+                    Publisher
+                    <br>
+                </span>
+                <p>{{ game['publisher'] }}</p>
+            </div>
+            <div class="col-6 col-md-4">
+                <span class="text-muted">
+                    Release Date
+                    <br>
+                </span>
+                <p>{{ game['release_date'] }}</p>
+            </div>
+            <div class="col-6 col-md-4">
+                <span class="text-muted">
+                    Genre
+                    <br>
+                </span>
+                <p>{{ game['genre'] }}</p>
+            </div>
+            <div class="col-6 col-md-4">
+                <span class="text-muted">
+                    Platform
+                    <br>
+                </span>
+                <p>{{ game['platform'] }}</p>
+            </div>
+        </div>
+        <div class="row py-3">
+            <h3>About {{ game['title'] }}</h3>
+            <hr class="mt-2 mb-3">
+            <div id="summary">
+                <p>
+                    {{ game['description'] }}
+                </p>
+                
+            </div>
+            <hr>
+        </div>
+        <h3 class="mt-5">User Game Status</h3>
+        <hr class="mt-2 mb-3">
+        {% for status in gamestatus %}
+        {% if status.game_title == game['title'] %}
+        <div class="media">
+            <a href="{{ url_for('users_show', user_id=status.user.id) }}">
+                <img src="{{ status.user.profile_picture }}" alt="" class="timeline-image">
+            </a>
+            <div class="media-body user m-1 mb-3">
+                <div class="card">
+                    <div class="deep-dark card-body">
+                        {% if g.user %}
+                            {% if g.user.id == status.user.id %}
+                            <form method="POST" action="/gamestatus/{{ status.id }}/edit" class="gamestatus-favorite">
+                                <button class="btn btn-outline-warning">Edit</button>
+                            </form>
+                            {% elif g.user.id != status.user.id %}
+                            <form method="POST" action="/gamestatus/{{ status.id }}/favorite" class="gamestatus-favorite">
+                                <button class="btn btn-sm {{ 'btn-primary' if status.id in favorites else 'btn-secondary' }}">
+                                    <i class="fa fa-star"></i>
+                                </button>
+                            </form>
+                            {% endif %}
+                        {% endif %}
+                        <a href="/users/{{ status.user.id }}">
+                            <h4><span class="username">{{ status.user.username }}</span></h4>
+                        </a>
+                        <span class="text-muted">{{ status.timestamp.strftime ('%d %B %Y') }}</span>
+                        <hr>
+                        <div class="body">
+                            <b><span class="game-title">{{ status.game_title }}</span></b>
+                            <p class="single-gamestatus">{{ status.status }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+
+
+{% endblock %}

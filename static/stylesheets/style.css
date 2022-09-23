@@ -1,0 +1,270 @@
+#mainNav{
+    display: flex;
+}
+
+#profile-image {
+    margin: 0 auto 15px;
+    width: 100%;
+}
+#profile-avatar {
+    float: left;
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border: 5px solid #fff;
+    margin-top: -20px;
+    z-index: 1;
+    position: relative;
+    box-shadow: 0 1px 1px rgba(136, 153, 166, 0.15);
+}
+
+#lockedingaming-profile {
+    height: 360px;
+    margin-top: -16px;
+    opacity: 0.7;
+    background-size: cover;
+    background-position: top center;
+}
+
+.user-location {
+    color: #657786;
+}
+
+a.nocolor {
+    color: #000000 !important;
+    text-decoration: none;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-group {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.mb-3 {
+    margin-bottom: 1rem!important;
+}
+
+.h-100 {
+    height: 100%!important;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -10px;
+    margin-left: -10px;
+}
+
+.form-inline {
+    display: flex;
+}
+
+a.stretched-link.no-underline {
+    color: #aaa;
+    display: flex;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+
+}
+
+.col-xl-3 {
+    -webkit-box-flex: 0;
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem!important;
+}
+
+.user-stats > .ml-auto {
+    display: flex;
+    align-items: center;
+}
+
+.user-stats > .ml-auto .btn {
+    min-width: 105px;
+    padding: 6px 16px;
+}
+
+.stat {
+    text-align: center;
+    height: 60px;
+    box-sizing: border-box;
+    padding: 14px 15px 7px;
+    line-height: 1;
+}
+
+.stat > .small {
+    color: #657786;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    margin-bottom: 0;
+}
+
+.stat > .small + h4 {
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 3px;
+}
+
+.gamestatus-favorite {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    z-index: 1;
+
+}
+
+#gamestatuses {
+    position: relative;
+}
+
+#gamestatuses .message-link {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+#gamestatuses .list-group-item a:not(.message-link) {
+    position: relative;
+    z-index: 2;
+}
+#gamestatuses .list-group-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 7px 20px 12px;
+}
+
+#gamestatuses:not(.no-hover) .list-group-item:hover {
+    background-color: white;
+}
+
+.timeline-image {
+    position: relative;
+    border-radius: 50%;
+    min-width: 70px;
+    height: 70px;
+    margin-top: 10px;
+}
+
+.user-card {
+    width: 100%;
+    padding-bottom: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    position: relative;
+    background: white;
+    margin-top: 20px;
+}
+
+.user-card > div {
+    position: absolute;
+    background: white;
+  }
+  
+  .user-card form {
+    margin-top: 5px;
+    margin-right: 5px;
+  }
+  
+  .user-card form .btn {
+    min-width: 89px;
+    padding: 4px 12px;
+    font-size: 12px;
+  }
+  
+.card-hero {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.card-image {
+    border: 3px solid #fff;
+    border-radius: 70px;
+    height: 70px;
+    width: 70px;
+    margin-top: -35px;
+    position: relative;
+    z-index: 1;
+}
+  
+.card-link {
+    display: inline-block;
+    margin-left: 10px;
+}
+  
+  .card-link > p {
+    position: absolute;
+  }
+  
+.user-cards {
+    margin-bottom: 20px;
+}
+  
+.card-inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+  
+.image-wrapper {
+    width: 100%;
+    padding-bottom: 36%;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-contents {
+    display: flex;
+    justify-content: space-between;
+}
+  
+p.card-bio {
+    margin: 2em 10px 0;
+}
+
+.gameprofile_background {
+    background-size: cover;
+    background-position: middle;
+    background-repeat: repeat;
+    height: 38rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0rem;
+    z-index: -1;
+    opacity: .5;
+}
+
+.gameprofile_gradient {
+    background: linear-gradient(90deg, #292e33 0%, rgba(35, 46, 46, 0.1) 16.15%, rgba(35, 46, 46, 0.1) 80.21%, #292e33 100%), linear-gradient(180deg, rgb(39, 43, 48) 0%, rgba(0, 0, 0, 0.58) 33.85%, #292e33 100%);
+    height: 101%;
+}

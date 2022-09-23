@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="bg"></div>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <ul class="list-group no-hover" id="messages">
+            <li class="list-group-item">
+                <a href="{{ url_for('users_show', user_id=gamestatus.user.id) }}">
+                    <img src="{{ gamestatus.user.profile_picture }}" alt="" class="timeline-image">
+                </a>
+                <div class="gamestatus-area">
+                    <div class="gamestatus-heading">
+                        <a href="/users/{{ gamestatus.user.id }}">{{ gamestatus.user.username }}</a>
+                        {% if g.user %}
+                            {% if g.user.id == gamestatus.user.id %}
+                                <form method="POST" action="/gamestatus/{{ gamestatus.id }}/delete">
+                                    <button class="btn btn-outline-danger">Delete</button>
+                                </form>
+                            {% elif g.user.is_following(gamestatus.user) %}
+                                <form method="POST" action="/users/stop-following/{{ gamestatus.user.id }}">
+                                    <button class="btn btn-primary">Unfollow</button>
+                                </form>
+                            {% else %}
+                                <form method="POST" action="/users/follow/{{ gamestatus.user.id }}">
+                                    <button class="btn btn-outline-primary btn-sm">Follow</button>
+                                </form>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <span class="game-title">{{ gamestatus.game_title }}</span>
+                    <p class="single-gamestatus">{{ gamestatus.status }}</p>
+                    <span class="text-muted">{{ gamestatus.timestamp.strftime ('%d %B %Y') }}</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'users/detail.html' %}
+
+{% block user_details %}
+
+<div class="col-sm-9">
+    <div class="row">
+        <ul class="list-group" id="gamestatuses">
+            {% for status in favorites %}
+            <li class="list-group-item">
+                <a href="/gamestatus/{{ status.id }}" class="message-link"/>
+                <a href="/users/{{ status.user.id }}">
+                    <img src="{{ status.user.profile_picture }}" alt="" class="timeline-image">
+                </a>
+                <div class="gamestatus-area">
+                    <a href="/users/{{ status.user.id }}">{{ status.user.username }}</a>
+                    <span class="text-muted">{{ status.timestamp.strftime ('%d %B %Y') }}</span>
+                    <b><h4>{{ status.game_title }}</h4></b>
+                    <p>{{ status.status }}</p>
+                </div>
+                {% if user.id == g.user.id %}
+                <form method="POST" action="/gamestatus/{{ status.id }}/favorite" class="gamestatus-favorite">
+                    <button class="btn btn-sm {{ 'btn-primary' }}">
+                        <i class="fa fa-star"></i>
+                    </button>
+                </form>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

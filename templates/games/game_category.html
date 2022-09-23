@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="main-cont py-4">
+    <div class="container">
+        <h1>Best {% filter upper %}{{ category }}{% endfilter %} games for PC!</h1>
+        <span class="text-muted">
+            <b>{{ games|length }}</b> free <b>{% filter upper %}{{ category }}{% endfilter %} games</b> found!
+        </span>
+        <div class="game_area row">
+            {% for game in games %}
+            <div class="col-xl-3 col-md-4 game-card mb-4 video-card">
+                <div class="card grow shadow">
+                    <div class="image-wrapper">
+                        <img src="{{ game.thumbnail }}" alt="{{ game.title }}" class="card-img-top">
+                    </div>
+                    <div class="card-body insert-before">
+                        <a href="/game/{{ game.id }}" class="stretched-link no-underline">
+                            <h4 class="card-title text-truncate">{{ game.title }}</h4>
+                        </a>
+                        <p class="card-text text-truncate text-muted mb-2">{{ game.short_description }}</p>
+                        <div class="d-flex mb-n2 justify-content-between align-items-center">
+                            <div class="float-right" style="position: relative">
+                                <span class="badge badge-success text-dark badge-genre mr-2">{{ game.genre }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
