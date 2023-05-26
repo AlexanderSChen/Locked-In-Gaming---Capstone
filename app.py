@@ -149,6 +149,9 @@ def users_show(user_id):
 def show_following(user_id):
     """Show list of people user is following"""
     check_user()
+    if not g.user:
+        flash("Access unauthorized.", 'danger')
+        return redirect("/")
 
     user = User.query.get_or_404(user_id)
     return render_template('users/following.html', user=user)
@@ -157,6 +160,9 @@ def show_following(user_id):
 def users_followers(user_id):
     """Show list of followers for the user"""
     check_user()
+    if not g.user:
+        flash("Access unauthorized.", 'danger')
+        return redirect("/")
 
     user = User.query.get_or_404(user_id)
     return render_template("users/followers.html", user=user)
@@ -165,6 +171,9 @@ def users_followers(user_id):
 def add_follow(follow_id):
     """Add follow for currently logged in user"""
     check_user()
+    if not g.user:
+        flash("Access unauthorized.", 'danger')
+        return redirect("/")
 
     followed_user = User.query.get_or_404(follow_id)
     g.user.following.append(followed_user)
@@ -176,6 +185,9 @@ def add_follow(follow_id):
 def stop_following(follow_id):
     """Have currently logged-in user stop following this user"""
     check_user()
+    if not g.user:
+        flash("Access unauthorized.", 'danger')
+        return redirect("/")
 
     followed_user = User.query.get(follow_id)
     g.user.following.remove(followed_user)
@@ -186,6 +198,9 @@ def stop_following(follow_id):
 def show_favorites(user_id):
     """Show favorited gamestatuses"""
     check_user()
+    if not g.user:
+        flash("Access unauthorized.", 'danger')
+        return redirect("/")
 
     user = User.query.get_or_404(user_id)
     return render_template('users/favorites.html', user=user, favorites=user.favorites)
@@ -194,6 +209,9 @@ def show_favorites(user_id):
 def add_favorite(gamestatus_id):
     """Toggle a favorited gamestatus fpr the currently logged in user"""
     check_user()
+    if not g.user:
+        flash("Access unauthorized.", 'danger')
+        return redirect("/")
 
     favorite_gamestatus = GameStatus.query.get_or_404(gamestatus_id)
     if favorite_gamestatus.user_id == g.user.id:
@@ -214,6 +232,9 @@ def add_favorite(gamestatus_id):
 def edit_profile():
     """Update profile for current user"""
     check_user()
+    if not g.user:
+        flash("Access unauthorized.", 'danger')
+        return redirect("/")
 
     user = g.user
     form = UserEditForm(obj = user)
@@ -287,6 +308,9 @@ def favorite_gamestatus(gamestatus_id):
     """Toggle a favorite gamestatus for user if logged in"""
 
     check_user()
+    if not g.user:
+        flash("Access unauthorized.", 'danger')
+        return redirect("/")
 
     fav_status = GameStatus.query.get_or_404(gamestatus_id)
     if fav_status.user_id == g.user.id:
@@ -308,6 +332,9 @@ def favorite_gamestatus(gamestatus_id):
 def gamestatus_add():
     """Add a game status: if GET show form. If valid existing message, update message and redirect to user page."""
     check_user()
+    if not g.user:
+        flash("Access unauthorized.", 'danger')
+        return redirect("/")
 
     form = GameStatusForm()
 
@@ -332,6 +359,9 @@ def edit_gamestatus(gamestatus_id):
     """Update gamestatus if it belongs to the user."""
 
     check_user()
+    if not g.user:
+        flash("Access unauthorized.", 'danger')
+        return redirect("/")
 
     user = g.user
     gstat = GameStatus.query.get(gamestatus_id)
@@ -351,6 +381,9 @@ def edit_gamestatus(gamestatus_id):
 def gamestatus_destroy(gamestatus_id):
     """Delete a gamestatus"""
     check_user()
+    if not g.user:
+        flash("Access unauthorized.", 'danger')
+        return redirect("/")
 
     gstat = GameStatus.query.get_or_404(gamestatus_id)
     if gstat.user_id != g.user.id:
